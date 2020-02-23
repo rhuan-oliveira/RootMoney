@@ -1,0 +1,9 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "RootMoney backend",
+  "main": "server.js",
+  "repository": "https://github.com/justapixel/RootMoney.git",
+  "author": "Rhuan Oliveira",
+  "license": "MIT"
+}
