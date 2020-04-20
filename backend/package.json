@@ -6,6 +6,9 @@
   "repository": "https://github.com/justapixel/RootMoney.git",
   "author": "Rhuan Oliveira",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
   "dependencies": {
     "celebrate": "^12.1.0",
     "cors": "^2.8.5",
