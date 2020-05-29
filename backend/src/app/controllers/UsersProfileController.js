@@ -17,12 +17,12 @@ module.exports = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
-        phone: req.body.phone
+        phone: req.body.phone,
       },
       {
-        where: {id: req.body.id}
+        where: { id: req.body.id },
       }
-    )
+    );
     res.json(update);
   },
 
@@ -32,5 +32,5 @@ module.exports = {
     const indexone = await UserProfile.findByPk(id);
 
     return res.json(indexone);
-  }
+  },
 };

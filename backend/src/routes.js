@@ -1,6 +1,6 @@
 const express = require('express');
 
-const UsersProfileController = require('./controllers/UsersProfileController');
+const UsersProfileController = require('./app/controllers/UsersProfileController');
 
 const routes = express.Router();
 
