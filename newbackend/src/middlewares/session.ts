@@ -15,7 +15,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const decoded: any = verify(token, authConfig.secret)
 
-    req.headers.userId = decoded.id
+    req.userId = decoded.id
 
     return next()
   } catch (err) {

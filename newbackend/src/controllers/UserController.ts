@@ -26,14 +26,15 @@ class UserController {
   }
 
   async update (req: Request, res: Response) {
-    const { userid, email, oldpassword, password, confirmpassword, name } = req.body
+    const { email, oldpassword, password, confirmpassword, name } = req.body
+    const userId = req.userId
 
     if (password !== confirmpassword) {
       res.status(400).json({ error: 'Confirm password not match' })
     }
 
     const user = await prisma.user.findOne({
-      where: { id: userid }
+      where: { id: userId }
     })
 
     if (!user) {
@@ -59,7 +60,7 @@ class UserController {
     const passwordHash = await bcrypt.hash(password, 9)
 
     const userUpdate = await prisma.user.update({
-      where: { id: userid },
+      where: { id: userId },
       data: { email, password_hash: passwordHash, name },
       select: { id: true, name: true, email: true }
     })

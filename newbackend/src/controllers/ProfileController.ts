@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 class ProfileController {
   async index (req: Request, res: Response) {
-    const userId = parseInt(req.params.userId)
+    const userId = req.userId
 
     const profile = await prisma.profile.findOne({
       where: { userId }
@@ -18,7 +18,7 @@ class ProfileController {
     const { firstname, lastname, phone } = req.body
 
     const profile = await prisma.profile.update({
-      where: { userId: req.body.userid },
+      where: { userId: req.userId },
       data: { firstname, lastname, phone },
       select: {
         firstname: true,

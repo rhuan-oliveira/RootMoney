@@ -16,7 +16,7 @@ routes.post('/api42/session', sessioncontroller.store)
 routes.use(sessionMiddleware)
 
 routes.put('/api42/user', usercontroller.update)
-routes.get('/api42/profile/:userId', profilecontroller.index)
+routes.get('/api42/profile', profilecontroller.index)
 routes.put('/api42/profile', profilecontroller.update)
 
 export default routes
