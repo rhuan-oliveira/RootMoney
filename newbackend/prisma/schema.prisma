@@ -11,12 +11,14 @@ generator client {
 }
 
 model Profile {
-  id          Int     @default(autoincrement()) @id
-  firstname   String
-  lastname    String
-  phone       String
-  user        User    @relation(fields: [userId], references: [id])
-  userId      Int     @unique
+  id              Int      @default(autoincrement()) @id
+  firstname       String
+  lastname        String
+  phone           String
+  user            User     @relation(fields: [userId], references: [id])
+  userId          Int      @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model User {
@@ -25,4 +27,34 @@ model User {
   name            String
   password_hash   String
   profile         Profile?
+  history         History[]
+  balance         Balance?
+}
+
+model History {
+  id              Int @default(autoincrement()) @id
+  category        String
+  amount          Float
+  description     String
+  date            DateTime
+  user            User @relation(fields: [userId], references: [id])
+  userId          Int
+  createdAt       DateTime @default(now())
+}
+
+model Categories {
+  id              Int      @default(autoincrement()) @id
+  name            String
+  type            String
+}
+
+model Balance {
+  id              Int      @default(autoincrement()) @id
+  balance         Float?
+  spends          Float?
+  incomes         Float?
+  user            User     @relation(fields: [userId], references: [id])
+  userId          Int      @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
