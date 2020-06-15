@@ -18,6 +18,13 @@ class UserController {
             lastname: req.body.lastname,
             phone: req.body.phone
           }
+        },
+        balance: {
+          create: {
+            balance: 0,
+            incomes: 0,
+            spends: 0
+          }
         }
       }
     })
