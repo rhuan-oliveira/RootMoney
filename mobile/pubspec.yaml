@@ -45,6 +45,9 @@ flutter:
     - family: OpenSans
       fonts:
         - asset: assets/fonts/OpenSans.ttf
+  assets:
+    - assets/images/background.png
+    - assets/images/logo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
