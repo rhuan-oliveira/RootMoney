@@ -1,11 +1,27 @@
 import { PrismaClient } from '@prisma/client'
 import { Request, Response } from 'express'
+import * as Yup from 'yup'
 import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
 class UserController {
   async store (req: Request, res: Response) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      email: Yup.string().email().required(),
+      password: Yup.string().required().min(6),
+      firstname: Yup.string().required(),
+      lastname: Yup.string().required(),
+      phone: Yup.string().required().min(8)
+    })
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ erro: 'Validation fails' })
+    }
+
+    console.log('pass')
+
     const password = await bcrypt.hash(req.body.password, 9)
     const { id, name, email } = await prisma.user.create({
       data: {
