@@ -26,6 +26,26 @@ class HistoryController {
     const { category, amount, type, description, date } = req.body
     const userId = req.userId
 
+    if (req.body.autobalance === true) {
+      const balanceNow = await prisma.balance.findOne({
+        where: { userId }
+      })
+      let spends = balanceNow?.spends ? balanceNow.spends : 0
+      let incomes = balanceNow?.incomes ? balanceNow.incomes : 0
+      let newbalance = balanceNow?.balance ? balanceNow.balance : 0
+      if (type === 'spends') {
+        newbalance = newbalance - amount
+        spends += amount
+      } else {
+        newbalance += amount
+        incomes += amount
+      }
+      await prisma.balance.update({
+        where: { userId },
+        data: { balance: newbalance, spends, incomes }
+      })
+    }
+
     await prisma.history.create({
       data: {
         category,
